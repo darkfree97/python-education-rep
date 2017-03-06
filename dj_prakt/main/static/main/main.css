@@ -1,0 +1,62 @@
+#header {
+    text-align: center;
+    border-bottom: 1px #cccccc solid;
+}
+#header h1{
+    margin: 20px 0 20px 0;
+    letter-spacing: 0.2em;
+}
+#left_menu{
+    float: left;
+    width: 100px;
+    padding: 10px;
+}
+#left_menu ul{
+    margin: 0;
+    padding: 0;
+}
+#left_menu ul li{
+    font-size: larger;
+    list-style-type: none;
+    margin:0 10px 10px 0;
+}
+#left_menu ul li a{
+    display: block;
+}
+#left_menu ul li.indented{
+    margin-top: 20px;
+}
+#left_menu ul li a:link, #left_menu ul li a:visited,
+#left_menu ul li a:active, #left_menu ul li a:hover {
+    text-decoration: none;
+}
+#left_menu ul li a:link, #left_menu ul li a:visited {
+    color: #0000FF;
+    background-color: #FFFFFF;
+}
+#left_menu ul li a:active, #left_menu ul li a:hover {
+    color: #FFFFFF;
+    background-color: #000000;
+}
+#left_menu ul li a.current:link, #left_menu ul li a.current:visited,
+#left_menu ul li a.current:active, #left_menu ul li a.current:hover {
+    color: #000000;
+    background-color: #FFFFFF;
+}
+#main{
+    margin-left: 110px;
+    border-left: 1px #cccccc solid;
+    padding: 10px;
+}
+#main h2:first-child{
+    margin: 0 0 10px 0;
+}
+#footer {
+    text-align: right;
+    border-top: 1px #cccccc solid;
+    padding-right: 10px;
+}
+#footer p{
+    font-size: smaller;
+    font-style: italic;
+}

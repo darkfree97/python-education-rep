@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% block additional_css %}
+    <link type="text/css" href="{% static 'main/main.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title %}
+Main Page
+{% endblock %}
+{% block content %}
+    <div id="header">
+        <hl>Веник-Торг</hl>
+    </div>
+    <div id="left_menu">
+        <ul>
+            {% url 'main' as page_url %}
+            <li><a href="{{ page_url }}" {% if page_url == current_url %}
+                   class="current"{% endif %}>Main</a></li>
+            <li class="indented"><a href="/admin/">Admin</a></li>
+            <li class="indented"><a href="{% url "logout" %}">Logout</a></li>
+        </ul>
+    </div>
+    <div id="main">
+{#    {% block main %}#}
+        <h2>Bce для уборки</h2>
+        <р>Фирма &quot;Beник-Topг&quot; продает все необходимое для уборки помещений различного назначения: веники, щетки, метлы, совки и пр.</р>
+        <h3>Новости</h3>
+        <h3>Рекомендуемые товары</h3>
+{#    {% endblock %}#}
+    </div>
+    <div id="footer">
+    <p>All is reserved!</p>
+    </div>
+{% endblock %}
