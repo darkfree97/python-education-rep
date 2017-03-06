@@ -1,0 +1,88 @@
+{% extends 'music/base.html' %}
+
+{% block title %}
+    {{ album.album_title }}
+{% endblock %}
+{% block body %}
+    <h1>Information about "{{ album.album_title }}" :</h1>
+    <img class="album_image" src="{{ album.album_logo.url }}">
+    <ul>
+        <li>Виконавець - {{ album.artist }}</li>
+        <li>Жанр - {{ album.genre }}</li>
+    </ul>
+
+    <h2>Пісні:</h2>
+    <ul style="list-style-type: none;">
+    {% if not album.song_set.count == 0 %}
+        {% for song in album.song_set.all %}
+    {#    <li><label for="song">{{ song }}</label><br><audio src='{{ song.file.url }}'  id="song" controls></audio></li>#}
+        <li><a class="music_link" href="{{ song.file.url }}">{{ song }}</a></li>
+        {% endfor %}
+    {% else %}
+        <li>В даному альбомі немає пісень</li>
+    {% endif %}
+    </ul>
+
+    <div id="play_dialog">
+        <audio id="player" class="pl_list" controls></audio>
+{#        <label for="auto_pl">non-stop </label><input type="checkbox" class="ui-checkboxradio-checked" id="auto_pl">#}
+    </div>
+
+    <script>
+    var _this;
+    $(".music_link").click(function (evt) {
+        evt.preventDefault();
+        _this = $(this);
+        $("#play_dialog").dialog("open");
+        $("#player").attr({src: _this.attr("href")});
+        document.getElementById('player').play();
+    });
+    $("#player").on('ended',function () {
+        console.log($("auto_pl").val());
+        var f = false;
+        var brake = false;
+        $(".music_link").each(function () {
+            if((_this.attr('href') != $(this).attr('href'))&&f&&!brake){
+                _this = $(this);
+                brake = true;
+            }
+            else if(_this.attr('href') == $(this).attr('href')&&!f&&!brake){
+                f = true;
+            }
+            if(_this.attr('href') == $(".music_link").last().attr('href')&&!brake){
+                _this = null;
+            }
+        });
+        if(_this != null){
+            $("#player").attr({src:_this.attr("href")});
+            document.getElementById('player').play();
+        }
+    });
+    $("#play_dialog").dialog({title : "Player", width: "300px" , autoOpen : false ,buttons : {
+        "Close" : function () {
+            document.getElementById('player').pause();
+            $(this).dialog("close");
+        }
+    }});
+    </script>
+
+{#{% if error_message %}#}
+{#    <p><strong>{{ error_message }}</strong></p>#}
+{#{% endif %}#}
+{#<h2>Пісні:</h2>#}
+{#<form action="{% url "music:favorite" album.id %}" method="post">#}
+{#    {% csrf_token %}#}
+{#    {% for song in album.song_set.all %}#}
+{#        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}">#}
+{#        <label for="song{{ forloop.counter }}">#}
+{#            {{ song }}#}
+{#            {% if song.is_favourite %}#}
+{#                <img src="http://i.imgur.com/b9b13Rd.png">#}
+{#            {% endif %}#}
+{#        </label>#}
+{#        <br>#}
+{#    {% endfor %}#}
+{#    <input type="submit" value="Favorite">#}
+{#</form>#}
+{% endblock %}
+

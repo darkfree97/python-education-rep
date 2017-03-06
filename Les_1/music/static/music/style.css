@@ -1,0 +1,13 @@
+body{
+    background: white url("images/background.jpg");
+}
+.navbar{
+    border-radius: 0%;
+}
+.navbar-brand{
+    font-family: 'Satisfy', cursive;
+}
+/*.album_image{*/
+    /*max-height: 30px;*/
+    /*max-width: 30px;*/
+/*}*/
